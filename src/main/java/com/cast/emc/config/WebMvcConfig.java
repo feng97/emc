@@ -10,6 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import java.nio.charset.Charset;
 
+/**
+ * 权限配置类
+ */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Value("${web.upload-path}")
