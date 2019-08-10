@@ -1,0 +1,182 @@
+2019-08-10 18:31:46 [main] INFO  [StartupInfoLogger.java:50] Starting EmcApplication on DESKTOP-UQ9UEGC with PID 17352 (E:\JavaWorkSpace\emc\target\classes started by feng in E:\JavaWorkSpace\emc)
+2019-08-10 18:31:46 [main] INFO  [SpringApplication.java:675] No active profile set, falling back to default profiles: default
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationDelegate.java:244] Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationDelegate.java:126] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationDelegate.java:182] Finished Spring Data repository scanning in 164ms. Found 8 repository interfaces.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationDelegate.java:244] Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationDelegate.java:126] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.EmcDataJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.EnvirDataJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.FreqDataJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.LabelJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.PulseDataJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.SampleDataJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.SysDataJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.UnitDataJPA.
+2019-08-10 18:31:48 [main] INFO  [RepositoryConfigurationDelegate.java:182] Finished Spring Data repository scanning in 33ms. Found 0 repository interfaces.
+2019-08-10 18:31:49 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$367deff7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:31:49 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$cf2bb831] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:31:49 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:31:49 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@703feacd' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:31:49 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$f4005ae3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:31:49 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:31:49 [main] INFO  [TomcatWebServer.java:90] Tomcat initialized with port(s): 8888 (http)
+2019-08-10 18:31:50 [main] INFO  [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8888"]
+2019-08-10 18:31:50 [main] INFO  [DirectJDKLog.java:173] Starting service [Tomcat]
+2019-08-10 18:31:50 [main] INFO  [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/9.0.19]
+2019-08-10 18:31:50 [main] INFO  [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2019-08-10 18:31:50 [main] INFO  [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 3696 ms
+2019-08-10 18:31:50 [main] INFO  [HikariDataSource.java:110] HikariPool-1 - Starting...
+2019-08-10 18:31:51 [main] INFO  [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2019-08-10 18:31:51 [main] INFO  [Version.java:46] HHH000412: Hibernate Core {5.3.10.Final}
+2019-08-10 18:31:51 [main] INFO  [Environment.java:213] HHH000206: hibernate.properties not found
+2019-08-10 18:31:51 [main] INFO  [JavaReflectionManager.java:49] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-08-10 18:31:51 [main] INFO  [Dialect.java:157] HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019-08-10 18:31:53 [main] INFO  [AbstractEntityManagerFactoryBean.java:415] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-08-10 18:31:53 [main] WARN  [AbstractApplicationContext.java:557] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'initStartupRunner': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'web.upload-path' in value "${web.upload-path}"
+2019-08-10 18:31:53 [main] INFO  [AbstractEntityManagerFactoryBean.java:597] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-08-10 18:31:53 [main] INFO  [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2019-08-10 18:31:53 [main] INFO  [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2019-08-10 18:31:53 [main] INFO  [DirectJDKLog.java:173] Stopping service [Tomcat]
+2019-08-10 18:31:53 [main] ERROR [SpringApplication.java:858] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'initStartupRunner': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'web.upload-path' in value "${web.upload-path}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:380)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1411)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:592)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:843)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.cast.emc.EmcApplication.main(EmcApplication.java:10)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'web.upload-path' in value "${web.upload-path}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:178)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:124)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:237)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:211)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:851)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1189)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1168)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:374)
+	... 17 common frames omitted
+2019-08-10 18:33:29 [main] INFO  [StartupInfoLogger.java:50] Starting EmcApplication on DESKTOP-UQ9UEGC with PID 18256 (E:\JavaWorkSpace\emc\target\classes started by feng in E:\JavaWorkSpace\emc)
+2019-08-10 18:33:29 [main] INFO  [SpringApplication.java:675] No active profile set, falling back to default profiles: default
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationDelegate.java:244] Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationDelegate.java:126] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationDelegate.java:182] Finished Spring Data repository scanning in 149ms. Found 8 repository interfaces.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationDelegate.java:244] Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationDelegate.java:126] Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.EmcDataJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.EnvirDataJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.FreqDataJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.LabelJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.PulseDataJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.SampleDataJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.SysDataJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationExtensionSupport.java:363] Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.cast.emc.repository.UnitDataJPA.
+2019-08-10 18:33:30 [main] INFO  [RepositoryConfigurationDelegate.java:182] Finished Spring Data repository scanning in 24ms. Found 0 repository interfaces.
+2019-08-10 18:33:31 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7d8bc096] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:33:31 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$163988d0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:33:31 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:33:31 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2687f956' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:33:31 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$3b0e2b82] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:33:31 [main] INFO  [PostProcessorRegistrationDelegate.java:330] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-10 18:33:32 [main] INFO  [TomcatWebServer.java:90] Tomcat initialized with port(s): 8888 (http)
+2019-08-10 18:33:32 [main] INFO  [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8888"]
+2019-08-10 18:33:32 [main] INFO  [DirectJDKLog.java:173] Starting service [Tomcat]
+2019-08-10 18:33:32 [main] INFO  [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/9.0.19]
+2019-08-10 18:33:32 [main] INFO  [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2019-08-10 18:33:32 [main] INFO  [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 3579 ms
+2019-08-10 18:33:33 [main] INFO  [HikariDataSource.java:110] HikariPool-1 - Starting...
+2019-08-10 18:33:33 [main] INFO  [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2019-08-10 18:33:33 [main] INFO  [Version.java:46] HHH000412: Hibernate Core {5.3.10.Final}
+2019-08-10 18:33:33 [main] INFO  [Environment.java:213] HHH000206: hibernate.properties not found
+2019-08-10 18:33:33 [main] INFO  [JavaReflectionManager.java:49] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-08-10 18:33:34 [main] INFO  [Dialect.java:157] HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019-08-10 18:33:35 [main] INFO  [AbstractEntityManagerFactoryBean.java:415] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-08-10 18:33:35 [main] WARN  [AbstractApplicationContext.java:557] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'initStartupRunner': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'web.upload-path' in value "${web.upload-path}"
+2019-08-10 18:33:35 [main] INFO  [AbstractEntityManagerFactoryBean.java:597] Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-08-10 18:33:35 [main] INFO  [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2019-08-10 18:33:36 [main] INFO  [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2019-08-10 18:33:36 [main] INFO  [DirectJDKLog.java:173] Stopping service [Tomcat]
+2019-08-10 18:33:36 [main] ERROR [SpringApplication.java:858] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'initStartupRunner': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'web.upload-path' in value "${web.upload-path}"
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:380)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1411)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:592)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:843)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.cast.emc.EmcApplication.main(EmcApplication.java:10)
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'web.upload-path' in value "${web.upload-path}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:178)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:124)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:237)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:211)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:851)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1189)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1168)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:593)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:90)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:374)
+	... 17 common frames omitted
+2019-08-10 18:36:32 [main] INFO  [StartupInfoLogger.java:50] Starting EmcApplication on DESKTOP-UQ9UEGC with PID 20376 (E:\JavaWorkSpace\emc\target\classes started by feng in E:\JavaWorkSpace\emc)
+2019-08-10 18:36:32 [main] INFO  [SpringApplication.java:675] No active profile set, falling back to default profiles: default
+2019-08-10 18:36:33 [main] WARN  [AbstractApplicationContext.java:557] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.cast.emc.EmcApplication]; nested exception is java.io.FileNotFoundException: class path resource [path.properties] cannot be opened because it does not exist
+2019-08-10 18:36:33 [main] ERROR [SpringApplication.java:858] Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.cast.emc.EmcApplication]; nested exception is java.io.FileNotFoundException: class path resource [path.properties] cannot be opened because it does not exist
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:181)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:315)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:232)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:275)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:95)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:705)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:531)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.cast.emc.EmcApplication.main(EmcApplication.java:10)
+Caused by: java.io.FileNotFoundException: class path resource [path.properties] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:180)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:159)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:99)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:73)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.loadProperties(PropertiesLoaderUtils.java:59)
+	at org.springframework.core.io.support.ResourcePropertySource.<init>(ResourcePropertySource.java:67)
+	at org.springframework.core.io.support.DefaultPropertySourceFactory.createPropertySource(DefaultPropertySourceFactory.java:37)
+	at org.springframework.context.annotation.ConfigurationClassParser.processPropertySource(ConfigurationClassParser.java:452)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:271)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:242)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:191)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:295)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:242)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:199)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:167)
+	... 13 common frames omitted

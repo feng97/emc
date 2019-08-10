@@ -3,6 +3,8 @@ package com.cast.emc.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -22,7 +24,6 @@ public class InitStartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         path.replace("/","\\");
-        System.out.println(path);
         File file = new File(path);
         //如果文件夹不存在则创建
         if (!file.exists() && !file.isDirectory()) {
