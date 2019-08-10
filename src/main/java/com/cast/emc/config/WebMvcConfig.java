@@ -18,6 +18,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Value("${web.upload-path}")
     private String filePath;
 
+    /**
+     * @param registry
+     */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 
@@ -38,6 +41,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         super.addResourceHandlers(registry);
     }
 
+    /**
+     * @return
+     */
     @Bean
     public HttpMessageConverter<String> responseBodyConverter() {
         StringHttpMessageConverter converter = new StringHttpMessageConverter(
