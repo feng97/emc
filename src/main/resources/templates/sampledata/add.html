@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{head::head}">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layui-row">
+        <span class="layui-breadcrumb">
+            <a>首页</a>
+            <a>时频包络指纹样本库</a>
+            <a th:if="${sampleData}"><cite>修改</cite></a>
+            <a th:if="${sampleData} eq null"><cite>添加</cite></a>
+        </span>
+    </div>
+    <hr class="layui-bg-blue">
+    <div class="layui-row">
+        <form class="layui-form" th:action="@{/sampledata}" method="post" id="sampleDataForm"
+              enctype="multipart/form-data">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${sampleData}"
+                       th:value="${sampleData.id}">
+            </div>
+            <blockquote class="layui-elem-quote" style="color: red">提示：该数据库为样本库，供数据识别算法使用，尽量不要修改其中的数据！</blockquote>
+            <blockquote th:if="${sampleData}" class="layui-elem-quote">在修改数据时，文件可以不用重新上传，默认不进行修改</blockquote>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">时频选择<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <select name="signalType" lay-verify="required" th:if="${sampleData}">
+                            <option value=""></option>
+                            <option value="TIME" th:selected="${sampleData.signalType.code == 'time'} ">时域信号</option>
+                            <option value="FREQUENCY" th:selected="${sampleData.signalType.code  == 'frequency'}">频域信号
+                            </option>
+                        </select>
+                        <select name="signalType" lay-verify="required" th:if="not ${sampleData}">
+                            <option value=""></option>
+                            <option value="TIME">时域信号</option>
+                            <option value="FREQUENCY">频域信号
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">信号类型<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="type" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${sampleData}" th:value="${sampleData.type}">
+                        <input type="text" name="type" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${sampleData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">采集数据<span th:if="not ${sampleData}"
+                                                              style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="file" autocomplete="off"
+                               class="layui-input" th:if="${sampleData}" th:value="${sampleData.data}">
+                        <input type="file" name="file" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${sampleData}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="sampleData_submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 你的HTML代码 -->
+
+<script src="/layui/layui.js"></script>
+<script>
+
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form', 'element', 'laydate'], function () {
+        var layer = layui.layer,
+            form = layui.form,
+            element = layui.element,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#datetime',
+            type: 'datetime',
+            trigger: 'click'
+        });
+        //监听提交
+        form.on('submit(sampleData_submit)', function (data) {
+            $.ajax({
+                url: '/sampledata',
+                type: 'POST',
+                data: new FormData($('#sampleDataForm')[0]),
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function () {
+                    if (document.getElementById("id")) {
+                        layer.confirm('修改成功！', {btn: ['确定'], title: "提示"}, function () {
+                            window.parent.setFrame("/sampledata/list")
+                        });
+                    } else if (data.id == null || data.id == "") {
+                        layer.msg('添加成功！');
+                        $('#sampleDataForm')[0].reset();
+                    }
+
+                },
+                error: function (XMLHttpRequest) {
+                    var data = JSON.parse(XMLHttpRequest.responseText);
+                    if (data.code == 2001) {
+                        layer.msg("文件大小超出20MB限制, 请压缩或降低文件质量! ")
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

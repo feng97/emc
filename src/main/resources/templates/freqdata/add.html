@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{head::head}">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layui-row">
+        <span class="layui-breadcrumb">
+            <a>首页</a>
+            <a>频域包络数据</a>
+            <a th:if="${freqData}"><cite>修改</cite></a>
+            <a th:if="${freqData} eq null"><cite>添加</cite></a>
+        </span>
+    </div>
+    <hr class="layui-bg-blue">
+    <div class="layui-row">
+        <form class="layui-form" th:action="@{/freqdata}" method="post" id="freqDataForm" enctype="multipart/form-data">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${freqData}"
+                       th:value="${freqData.id}">
+            </div>
+            <blockquote th:if="${freqData}" class="layui-elem-quote">在修改数据时，文件可以不用重新上传，默认不进行修改</blockquote>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">信号名称<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.name}">
+                        <input type="text" name="name" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="item" autocomplete="off"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.item}">
+                        <input type="text" name="item" autocomplete="off"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">识别结果<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="modulation" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.modulation}">
+                        <input type="text" name="modulation" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">采集地点</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="place" autocomplete="off"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.place}">
+                        <input type="text" name="place" autocomplete="off"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">采集数据<span th:if="not ${freqData}"
+                                                              style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="file" autocomplete="off"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.data}">
+                        <input type="file" name="file" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="remarks" autocomplete="off"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.remarks}">
+                        <input type="text" name="remarks" autocomplete="off"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">采集时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="datetime" id="datetime" autocomplete="off"
+                               class="layui-input" th:if="${freqData}"
+                               th:value="${#dates.format(freqData.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                        <input type="text" name="datetime" id="datetime" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="freqData_submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 你的HTML代码 -->
+
+<script src="/layui/layui.js"></script>
+<script>
+
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form', 'element', 'laydate'], function () {
+        var layer = layui.layer,
+            form = layui.form,
+            element = layui.element,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#datetime',
+            type: 'datetime',
+            trigger: 'click'
+        });
+        //监听提交
+        form.on('submit(freqData_submit)', function (data) {
+            $.ajax({
+                url: '/freqdata',
+                type: 'POST',
+                data: new FormData($('#freqDataForm')[0]),
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (document.getElementById("id")) {
+                        layer.confirm('修改成功！', {btn: ['确定'], title: "提示"}, function () {
+                            window.parent.setFrame("/freqdata/list")
+                        });
+                    } else if (data.id == null || data.id == "") {
+                        layer.msg('添加成功！');
+                        $('#freqDataForm')[0].reset();
+                    }
+
+                },
+                error: function (XMLHttpRequest) {
+                    var data = JSON.parse(XMLHttpRequest.responseText);
+                    if (data.code == 2001) {
+                        layer.msg("文件大小超出20MB限制, 请压缩或降低文件质量! ")
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

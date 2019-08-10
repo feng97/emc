@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{head::head}">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layui-row">
+        <span class="layui-breadcrumb">
+        <a>首页</a>
+        <a>频域包络数据</a>
+        <a><cite>列表</cite></a>
+    </span>
+    </div>
+    <hr class="layui-bg-blue">
+
+    <div class="layui-row">
+        <div class="search">
+            <div class="layui-inline">
+                <input class="layui-input" name="condition" id="condition" autocomplete="off">
+            </div>
+            <button class="layui-btn" data-type="reload" id="search">搜索</button>
+            <button class="layui-btn" data-type="reload" id="reload">重置</button>
+        </div>
+        <table class="layui-hide" id="freqTable" lay-filter="freqTable"></table>
+    </div>
+
+</div>
+
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script type="text/html" id="toolBar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="update">修改</a>
+</script>
+<script type="text/html" id="download">
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="download">下载</a>
+</script>
+<script th:inline="none">
+    layui.use(['table', 'element'], function () {
+        var element = layui.element;
+        var table = layui.table;
+        table.render({
+            elem: '#freqTable',
+            url: '/api/freqdata',
+            cellMinWidth: 80,
+            toolbar: true,
+            loading: true,
+            cols: [[ //标题栏
+                {field: 'id', title: 'ID', sort: true},
+                {field: 'name', title: '信号名称'},
+                {field: 'item', title: '项目名称'},
+                {field: 'modulation', title: '识别结果'},
+                {field: 'place', title: '采集地点'},
+                {field: 'data', title: '采集数据', toolbar: '#download'},
+                {field: 'remarks', title: '备注'},
+                {
+                    field: 'createTime', title: '创建日期',
+                    templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>",
+                    sort: true,
+                    width: 180
+                },
+                {fixed: 'right', title: '操作', toolbar: '#toolBar', width: 120}
+            ]],
+            initSort: {
+                field: 'id' //排序字段，对应 cols 设定的各字段名
+                ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            },
+            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+            },
+
+        });
+        // 删除响应
+        table.on('tool(freqTable)', function (obj) {
+            var id = obj.data.id;
+            var file = obj.data.data;
+            //console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('您确定要删除该数据吗?', {btn: ['确定', '取消'], title: "提示"}, function () {
+                    // 获取meta中的csrf，并通过headers发送
+                    var csrf = $("meta[name='X-CSRF-TOKEN']").attr("content");
+                    headers = {"X-CSRF-TOKEN": csrf};
+                    $.ajax({//异步请求返回给后台
+                        url: '/freqdata/' + id,
+                        type: 'DELETE',
+                        headers: headers,
+                        dataType: 'json',
+                        success: function (data) {
+                            obj.del();
+                            layer.closeAll();
+                            layer.msg('删除成功。');
+                        },
+                        error: function () {
+                            layer.closeAll();
+                            layer.alert('删除失败')
+                        }
+                    });
+                });
+            }
+            if (obj.event === 'update') {
+                window.parent.setFrame('/freqdata/' + id)
+            }
+            if (obj.event === 'download') {
+                layer.msg(file);
+                window.open(file)
+            }
+        });
+
+        var $ = layui.$,
+            // 表格搜索重载
+            search = {
+                reload: function () {
+                    var condition = $('#condition');
+                    //执行重载
+                    table.reload('freqTable', {
+                        page: {
+                            curr: 1     //重新从第 1 页开始
+                        }
+                        , where: {
+                            condition: condition.val()
+                        }
+                    }, 'data');
+                }
+            },
+            // 表格搜索置空重载
+            reload = {
+                reload: function () {
+                    table.reload('freqTable', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            condition: ""   // condition置空
+                        }
+                    }, 'data');
+                }
+            };
+        $('.search #search').on('click', function () {
+            var type = $(this).data('type');
+            search[type] ? search[type].call(this) : '';
+        });
+        $('.search #reload').on('click', function () {
+            $('#condition').val("");    // condition置空
+            var type = $(this).data('type');
+            reload[type] ? reload[type].call(this) : '';
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

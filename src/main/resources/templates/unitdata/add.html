@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{head::head}">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layui-row">
+        <span class="layui-breadcrumb">
+            <a>首页</a>
+            <a>单机数据子库</a>
+            <a th:if="${unitData}"><cite>修改</cite></a>
+            <a th:if="${unitData} eq null"><cite>添加</cite></a>
+        </span>
+    </div>
+    <hr class="layui-bg-blue">
+    <div class="layui-row">
+        <form class="layui-form" th:action="@{/unitdata}" method="post"
+              id="unitDataForm" lay-filter="example" enctype="multipart/form-data">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${unitData}"
+                       th:value="${unitData.id}">
+            </div>
+            <blockquote th:if="${unitData}" class="layui-elem-quote">在修改数据时，文件可以不用重新上传，默认不进行修改</blockquote>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">航天器名称<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <select name="spacecraft" lay-verify="required" th:if="${unitData}">
+                            <option value=""></option>
+                            <option th:value="${unitData.spacecraft}"
+                                    th:text="${unitData.spacecraft}"
+                                    selected></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '0'}"></option>
+                        </select>
+                        <select name="spacecraft" lay-verify="required" th:if="not ${unitData}">
+                            <option value=""></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '0'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">批次</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="batch" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.batch}">
+                        <input type="text" name="batch" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">引用标准</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="standard" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.standard}">
+                        <input type="text" name="standard" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属型号</label>
+                    <div class="layui-input-inline">
+                        <select name="model" th:if="${unitData}">
+                            <option value=""></option>
+                            <option th:value="${unitData.model}"
+                                    th:text="${unitData.model}"
+                                    selected></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '1'}"></option>
+                        </select>
+                        <select name="model" th:if="not ${unitData}">
+                            <option value=""></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '1'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设备名称<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="equName" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.equName}">
+                        <input type="text" name="equName" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">设备研制编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="equNumber" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.equNumber}">
+                        <input type="text" name="equNumber" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属分系统</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="subsys" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.subsys}">
+                        <input type="text" name="subsys" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属阶段</label>
+                    <div class="layui-input-inline">
+                        <select name="stage" th:if="${unitData}">
+                            <option value=""></option>
+                            <option th:value="${unitData.stage}"
+                                    th:text="${unitData.stage}"
+                                    selected></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '2'}"></option>
+                        </select>
+                        <select name="stage" th:if="not ${unitData}">
+                            <option value=""></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '2'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">试验项目<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="item" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.item}">
+                        <input type="text" name="item" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">测试场地</label>
+                    <div class="layui-input-inline">
+                        <select name="place" th:if="${unitData}">
+                            <option value=""></option>
+                            <option th:value="${unitData.place}"
+                                    th:text="${unitData.place}"
+                                    selected></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '3'}"></option>
+                        </select>
+                        <select name="place" th:if="not ${unitData}">
+                            <option value=""></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '3'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">现场布局</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="layoutFile" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.layout}" accept="image/*">
+                        <input type="file" name="layoutFile" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}" accept="image/*">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">极化方式</label>
+                    <div class="layui-input-inline">
+                        <select name="pol" th:if="${unitData}">
+                            <option value=""></option>
+                            <option th:value="${unitData.pol}"
+                                    th:text="${unitData.pol}"
+                                    selected></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '4'}"></option>
+                        </select>
+                        <select name="pol" th:if="not ${unitData}">
+                            <option value=""></option>
+                            <option th:each="label:${unitLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '4'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">测试对象</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="testObj" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.testObj}">
+                        <input type="text" name="testObj" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">频率起点</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="frequencyL" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.frequencyL}">
+                        <input type="text" name="frequencyL" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">频率终点</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="frequencyR" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.frequencyR}">
+                        <input type="text" name="frequencyR" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">工作状态</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="state" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.state}">
+                        <input type="text" name="state" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">试验数据<span th:if="not ${unitData}"
+                                                              style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="dataFile" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.data}">
+                        <input type="file" name="dataFile" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">上下包络</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="envelopeFile" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.envelope}">
+                        <input type="file" name="envelopeFile" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">超频点及幅值</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="exceedFile" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.exceed}">
+                        <input type="file" name="exceedFile" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">试验报告</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="reportFile" autocomplete="off"
+                               class="layui-input" th:if="${unitData}" th:value="${unitData.report}">
+                        <input type="file" name="reportFile" autocomplete="off"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">测试时间<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="datetime" id="datetime" autocomplete="off"
+                               class="layui-input" th:if="${unitData}"
+                               th:value="${#dates.format(unitData.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                        <input type="text" name="datetime" id="datetime" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${unitData}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="unitData_submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 你的HTML代码 -->
+
+<script src="/layui/layui.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form', 'element', 'laydate'], function () {
+        var layer = layui.layer,
+            form = layui.form,
+            element = layui.element,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#datetime',
+            type: 'datetime',
+            trigger: 'click'
+        });
+        //监听提交
+        form.on('submit(unitData_submit)', function (data) {
+
+            $.ajax({
+                url: '/unitdata',
+                type: 'POST',
+                data: new FormData($('#unitDataForm')[0]),
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function () {
+                    if (document.getElementById("id")) {
+                        layer.confirm('修改成功！', {btn: ['确定'], title: "提示"}, function () {
+                            window.parent.setFrame("/unitdata/list")
+                        });
+                    } else {
+                        layer.msg('添加成功！');
+                        $('#unitDataForm')[0].reset();
+                    }
+                },
+                error: function (XMLHttpRequest) {
+                    var data = JSON.parse(XMLHttpRequest.responseText);
+                    if (data.code == 2001) {
+                        layer.msg("文件大小超出20MB限制, 请压缩或降低文件质量! ")
+                    }
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
+</body>
+</html>

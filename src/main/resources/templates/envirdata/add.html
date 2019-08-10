@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{head::head}">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layui-row">
+        <span class="layui-breadcrumb">
+            <a>首页</a>
+            <a>环境数据子库</a>
+            <a th:if="${envirData}"><cite>修改</cite></a>
+            <a th:if="${envirData} eq null"><cite>添加</cite></a>
+        </span>
+    </div>
+    <hr class="layui-bg-blue">
+    <div class="layui-row">
+        <form class="layui-form" th:action="@{/envirdata}" method="post" id="envirDataForm"
+              enctype="multipart/form-data">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${envirData}"
+                       th:value="${envirData.id}">
+            </div>
+            <blockquote th:if="${envirData}" class="layui-elem-quote">在修改数据时，文件可以不用重新上传，默认不进行修改</blockquote>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">引用标准<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="standard" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.standard}">
+                        <input type="text" name="standard" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">试验项目<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="item" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.item}">
+                        <input type="text" name="item" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">测试场地</label>
+                    <div class="layui-input-inline">
+                        <select name="place" th:if="${envirData}">
+                            <option value=""></option>
+                            <option th:value="${envirData.place}"
+                                    th:text="${envirData.place}"
+                                    selected></option>
+                            <option th:each="label:${envirLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '3'}"></option>
+                        </select>
+                        <select name="place" th:if="not ${envirData}">
+                            <option value=""></option>
+                            <option th:each="label:${envirLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '3'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">现场布局</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="layoutFile" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.layout}">
+                        <input type="file" name="layoutFile" autocomplete="off"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">极化方式</label>
+                    <div class="layui-input-inline">
+                        <select name="pol" th:if="${envirData}">
+                            <option value=""></option>
+                            <option th:value="${envirData.pol}"
+                                    th:text="${envirData.pol}"
+                                    selected></option>
+                            <option th:each="label:${envirLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '4'}"></option>
+                        </select>
+                        <select name="pol" th:if="not ${envirData}">
+                            <option value=""></option>
+                            <option th:each="label:${envirLabel}"
+                                    th:value="${label.content}"
+                                    th:text="${label.content}"
+                                    th:if="${label.name == '4'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">频率起点</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="frequencyL" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.frequencyL}">
+                        <input type="text" name="frequencyL" autocomplete="off"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">频率终点</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="frequencyR" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.frequencyR}">
+                        <input type="text" name="frequencyR" autocomplete="off"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">测试状态</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="state" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.state}">
+                        <input type="text" name="state" autocomplete="off"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">试验数据<span th:if="not ${envirData}"
+                                                              style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="dataFile" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.data}">
+                        <input type="file" name="dataFile" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">上下包络</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="envelopeFile" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.envelope}">
+                        <input type="file" name="envelopeFile" autocomplete="off"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">超频点及幅值</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="exceedFile" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.exceed}">
+                        <input type="file" name="exceedFile" autocomplete="off"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">试验报告</label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="reportFile" autocomplete="off"
+                               class="layui-input" th:if="${envirData}" th:value="${envirData.report}">
+                        <input type="file" name="reportFile" autocomplete="off"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">测试时间<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="datetime" id="datetime" autocomplete="off"
+                               class="layui-input" th:if="${envirData}"
+                               th:value="${#dates.format(envirData.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                        <input type="text" name="datetime" id="datetime" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${envirData}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="envirData_submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 你的HTML代码 -->
+
+<script src="/layui/layui.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form', 'element', 'laydate'], function () {
+        var layer = layui.layer,
+            form = layui.form,
+            element = layui.element,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#datetime',
+            type: 'datetime',
+            trigger: 'click'
+        });
+        //监听提交
+        form.on('submit(envirData_submit)', function (data) {
+
+            $.ajax({
+                url: '/envirdata',
+                type: 'POST',
+                data: new FormData($('#envirDataForm')[0]),
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function () {
+                    if (document.getElementById("id")) {
+                        layer.confirm('修改成功！', {btn: ['确定'], title: "提示"}, function () {
+                            window.parent.setFrame("/envirdata/list")
+                        });
+                    } else {
+                        layer.msg('添加成功！');
+                        $('#envirDataForm')[0].reset();
+                    }
+
+                },
+                error: function (XMLHttpRequest) {
+                    var data = JSON.parse(XMLHttpRequest.responseText);
+                    if (data.code == 2001) {
+                        layer.msg("文件大小超出20MB限制, 请压缩或降低文件质量! ")
+                    }
+                }
+            });
+
+            return false;
+        });
+
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{head::head}">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layui-row">
+        <span class="layui-breadcrumb">
+        <a>首页</a>
+        <a>标签管理</a>
+        <a><cite>型号数据标签</cite></a>
+    </span>
+
+        <hr class="layui-bg-blue">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>型号数据标签管理</legend>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>添加标签</legend>
+            <div class="layui-field-box">
+                <form class="layui-form" th:action="@{/label}" method="post">
+                    <input type="hidden" name="type" autocomplete="off" class="layui-input"
+                           value="SYS">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">标签名称</label>
+                            <div class="layui-input-inline">
+                                <select name="name" lay-filter="name" lay-verify="required">
+                                    <option value=""></option>
+                                    <option value="0">航天器名称</option>
+                                    <option value="1">所属型号</option>
+                                    <option value="2">所属阶段</option>
+                                    <option value="3">测试场地</option>
+                                    <option value="4">极化方式</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">标签内容<span style="color: red">*</span></label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="content" autocomplete="off" lay-verify="required"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="label_submit">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field" th:each="n : ${#numbers.sequence(0,4)}" >
+            <legend th:if="${n == 0}">航天器名称</legend>
+            <legend th:if="${n == 1}">所属型号</legend>
+            <legend th:if="${n == 2}">所属阶段</legend>
+            <legend th:if="${n == 3}">测试场地</legend>
+            <legend th:if="${n == 4}">极化方式</legend>
+            <div class="layui-field-box">
+                <div class="layui-form-item">
+                    <div class="layui-inline" th:each="data:${sysLabel}" th:if="${data.name} == ${n}" th:id="${data.id}">
+                        <form class="layui-form" th:action="@{/label}" method="post">
+                            <input type="hidden" name="id" autocomplete="off" class="layui-input"
+                                   th:value="${data.id}">
+                            <input type="hidden" name="name" autocomplete="off" class="layui-input"
+                                   th:value="${data.name}">
+                            <input type="hidden" name="type" autocomplete="off" class="layui-input"
+                                   value="SYS">
+                            <div class="layui-input-inline">
+                                <input type="text" name="content" autocomplete="off" lay-verify="required"
+                                       class="layui-input" th:value="${data.content}">
+                            </div>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <button class="layui-btn layui-btn-danger layui-btn-xs"
+                                        type="button" lay-filter="labelDelete"
+                                        th:onclick="'javascript:deleteLabel(\''+${data.id}+'\')'">删除
+                                </button>
+                                <button class="layui-btn layui-btn-warm layui-btn-xs" lay-submit
+                                        lay-filter="labelUpdate">
+                                    修改
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="update">修改</a>
+</script>
+
+<script th:inline="none">
+    layui.use(['form', 'element', 'layer'], function () {
+        var element = layui.element;
+        var form = layui.form;
+        var layer = layui.layer;
+        $ = layui.jquery;
+
+        form.on('submit(label_submit)', function (data) {
+            $.ajax({
+                url: '/label',
+                type: 'POST',
+                data: data.field,
+                dataType: 'text',
+                success: function () {
+                    layer.confirm('添加成功！', {btn: ['确定'], title: "提示", closeBtn: 0}, function () {
+                        window.parent.setFrame("/label/sys")
+                    });
+                },
+                error: function () {
+                    layer.msg('添加失败！')
+                }
+            });
+            return false;
+        });
+
+        form.on('submit(labelUpdate)', function (data) {
+            $.ajax({
+                url: '/label',
+                type: 'POST',
+                data: data.field,
+                dataType: 'text',
+                success: function () {
+                    layer.msg("修改成功")
+                },
+                error: function () {
+                    layer.msg('修改失败！')
+                }
+            });
+            return false;
+        });
+    });
+
+    function deleteLabel(id) {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.confirm('您确定要删除该标签吗?', {btn: ['确定', '取消'], title: "提示", closeBtn: 0}, function () {
+                // 获取meta中的csrf，并通过headers发送
+                var csrf = $("meta[name='X-CSRF-TOKEN']").attr("content");
+                headers = {"X-CSRF-TOKEN": csrf};
+                $.ajax({//异步请求返回给后台
+                    url: '/label/' + id,
+                    type: 'DELETE',
+                    headers: headers,
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#" + id).remove()
+                        layer.msg("删除成功")
+                    },
+                    error: function () {
+                        layer.alert('删除失败')
+                    }
+                });
+            });
+        });
+    }
+
+</script>
+
+</body>
+</html>
