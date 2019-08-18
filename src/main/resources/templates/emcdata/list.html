@@ -51,8 +51,22 @@
                 {field: 'device', title: '采集设备'},
                 {field: 'snr', title: '信噪比', hide: true},
                 {field: 'place', title: '采集地点', hide: true},
-                {field: 'centerFreq', title: '中心频率'},
-                {field: 'bandWidth', title: '带宽'},
+                {
+                    field: 'centerFreq', title: '中心频率',
+                    templet: function (d) {
+                        if (d.centerFreq) {
+                            return d.centerFreq + 'Mhz'
+                        } else return "";
+                    }
+                },
+                {
+                    field: 'bandWidth', title: '带宽',
+                    templet: function (d) {
+                        if (d.bandWidth) {
+                            return d.bandWidth + 'khz'
+                        } else return "";
+                    }
+                },
                 {field: 'data', title: '采集数据', toolbar: '#download'},
                 {field: 'modulation', title: '调制方式'},
                 {field: 'remarks', title: '备注', hide: true},
@@ -66,7 +80,7 @@
             ]],
             initSort: {
                 field: 'id' //排序字段，对应 cols 设定的各字段名
-                ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+                , type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
             },
             page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
