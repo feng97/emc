@@ -32,6 +32,9 @@ public class BasicService {
     protected SysDataJPA sysDataJPA;
 
     @Autowired
+    protected UsedFreqPointJPA usedFreqPointJPA;
+
+    @Autowired
     protected LabelJPA labelJPA;
 
     @Autowired

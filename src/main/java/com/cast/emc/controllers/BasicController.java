@@ -35,6 +35,9 @@ public class BasicController {
     protected SysDataService sysDataService;
 
     @Autowired
+    protected UsedFreqPointService usedFreqPointService;
+
+    @Autowired
     protected UploadService uploadService;
 
     @Autowired

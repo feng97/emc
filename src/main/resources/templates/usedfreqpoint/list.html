@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{head::head}">
+</head>
+<body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layui-row">
+        <span class="layui-breadcrumb">
+            <a>首页</a>
+            <a>频点识别频率列表</a>
+        </span>
+    </div>
+    <hr class="layui-bg-blue">
+    <div class="layui-row">
+        <form class="layui-form" th:action="@{/usedfreqpoint}" method="post" id="usedFreqPointForm"
+              enctype="multipart/form-data">
+            <div class="layui-input-block">
+                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${usedFreqPoint}"
+                       th:value="${usedFreqPoint.id}">
+            </div>
+            <blockquote th:if="${usedFreqPoint}" class="layui-elem-quote">现在可以在下方表单中修改数据</blockquote>
+            <br>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">业务名称<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="bizName" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.bizName}">
+                        <input type="text" name="bizName" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${usedFreqPoint}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">起始频率<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="freqL" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.freqL}">
+                        <input type="text" name="freqL" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${usedFreqPoint}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">终止频率<span style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="freqR" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.freqR}">
+                        <input type="text" name="freqR" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${usedFreqPoint}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="usedFreqPoint_submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr class="layui-bg-blue">
+    <div class="layui-row">
+        <div class="search">
+            <div class="layui-inline">
+                <input class="layui-input" name="condition" id="condition" autocomplete="off">
+            </div>
+            <button class="layui-btn" data-type="reload" id="search">搜索</button>
+            <button class="layui-btn" data-type="reload" id="reload">重置</button>
+        </div>
+        <table class="layui-hide" id="usedFreqPointTable" lay-filter="usedFreqPointTable"></table>
+    </div>
+</div>
+<!-- 你的HTML代码 -->
+
+<script src="/layui/layui.js"></script>
+<script>
+
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form', 'element', 'laydate'], function () {
+        var layer = layui.layer,
+            form = layui.form,
+            element = layui.element,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#datetime',
+            type: 'datetime',
+            trigger: 'click'
+        });
+        //监听提交
+        form.on('submit(usedFreqPoint_submit)', function (data) {
+            $.ajax({
+                url: '/usedfreqpoint',
+                type: 'POST',
+                data: new FormData($('#usedFreqPointForm')[0]),
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function () {
+                    if (document.getElementById("id")) {
+                        layer.confirm('修改成功！', {btn: ['确定'], title: "提示"}, function () {
+                            window.parent.setFrame("/usedfreqpoint/list")
+                        });
+                    } else if (data.id == null || data.id == "") {
+                        layer.msg('添加成功！');
+                        $('#usedFreqPointForm')[0].reset();
+                    }
+
+                },
+                error: function (XMLHttpRequest) {
+                    var data = JSON.parse(XMLHttpRequest.responseText);
+                    if (data.code == 2001) {
+                        layer.msg("文件大小超出20MB限制, 请压缩或降低文件质量! ")
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>
+<script type="text/html" id="toolBar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="update">修改</a>
+</script>
+<script th:inline="none">
+    layui.use(['table', 'element'], function () {
+        var element = layui.element;
+        var table = layui.table;
+        table.render({
+            elem: '#usedFreqPointTable',
+            url: '/api/usedfreqpoint',
+            cellMinWidth: 80,
+            toolbar: true,
+            loading: true,
+            autoSort:false,
+            cols: [[ //标题栏
+                {field: 'id', title: 'ID', sort: true, hide: true},
+                {field: 'freqL', title: '频率范围',templet: "<div>{{d.freqL}}Mhz-{{d.freqR}}Mhz</div>"},
+                {field: 'bizName', title: '业务名称'},
+                {
+                    field: 'createTime', title: '创建日期',
+                    templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>",
+                    sort: true,
+                    width: 180,
+                    hide: true
+                },
+                {fixed: 'right', title: '操作', toolbar: '#toolBar', width: 120}
+            ]],
+            initSort: {
+                field: 'id' //排序字段，对应 cols 设定的各字段名
+                ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+            },
+            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+            },
+
+        });
+        // 删除响应
+        table.on('tool(usedFreqPointTable)', function (obj) {
+            var id = obj.data.id;
+            var file = obj.data.data;
+            //console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('您确定要删除该数据吗?', {btn: ['确定', '取消'], title: "提示"}, function () {
+                    // 获取meta中的csrf，并通过headers发送
+                    var csrf = $("meta[name='X-CSRF-TOKEN']").attr("content");
+                    headers = {"X-CSRF-TOKEN": csrf};
+                    $.ajax({//异步请求返回给后台
+                        url: '/usedfreqpoint/' + id,
+                        type: 'DELETE',
+                        headers: headers,
+                        dataType: 'json',
+                        success: function (data) {
+                            obj.del();
+                            layer.closeAll();
+                            layer.msg('删除成功。');
+                        },
+                        error: function () {
+                            layer.closeAll();
+                            layer.alert('删除失败')
+                        }
+                    });
+                });
+            }
+            if (obj.event === 'update') {
+                window.parent.setFrame('/usedfreqpoint/' + id)
+            }
+            if (obj.event === 'download') {
+                layer.msg(file);
+                window.open(file)
+            }
+        });
+
+        var $ = layui.$,
+            // 表格搜索重载
+            search = {
+                reload: function () {
+                    var condition = $('#condition');
+                    //执行重载
+                    table.reload('usedFreqPointTable', {
+                        page: {
+                            curr: 1     //重新从第 1 页开始
+                        }
+                        , where: {
+                            condition: condition.val()
+                        }
+                    }, 'data');
+                }
+            },
+            // 表格搜索置空重载
+            reload = {
+                reload: function () {
+                    table.reload('usedFreqPointTable', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        , where: {
+                            condition: ""   // condition置空
+                        }
+                    }, 'data');
+                }
+            };
+        $('.search #search').on('click', function () {
+            var type = $(this).data('type');
+            search[type] ? search[type].call(this) : '';
+        });
+        $('.search #reload').on('click', function () {
+            $('#condition').val("");    // condition置空
+            var type = $(this).data('type');
+            reload[type] ? reload[type].call(this) : '';
+        });
+
+
+    });
+</script>
+</body>
+</html>

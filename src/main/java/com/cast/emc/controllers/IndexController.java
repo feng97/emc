@@ -103,4 +103,9 @@ public class IndexController extends BasicController {
     public String sysDataList() {
         return "sysdata/list";
     }
+
+    @RequestMapping(value = "/usedfreqpoint/list")
+    public String usedFreqPointAdd() {
+        return "usedfreqpoint/list";
+    }
 }
