@@ -12,50 +12,56 @@
     </div>
     <hr class="layui-bg-blue">
     <div class="layui-row">
-        <form class="layui-form" th:action="@{/usedfreqpoint}" method="post" id="usedFreqPointForm"
-              enctype="multipart/form-data">
-            <div class="layui-input-block">
-                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${usedFreqPoint}"
-                       th:value="${usedFreqPoint.id}">
-            </div>
-            <blockquote th:if="${usedFreqPoint}" class="layui-elem-quote">现在可以在下方表单中修改数据</blockquote>
-            <br>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">业务名称<span style="color: red">*</span></label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="bizName" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.bizName}">
-                        <input type="text" name="bizName" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="not ${usedFreqPoint}">
+        <fieldset class="layui-elem-field">
+            <legend>添加列表数据</legend>
+            <div class="layui-field-box">
+                <form class="layui-form" th:action="@{/usedfreqpoint}" method="post" id="usedFreqPointForm"
+                      enctype="multipart/form-data">
+                    <div class="layui-input-block">
+                        <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input"
+                               th:if="${usedFreqPoint}"
+                               th:value="${usedFreqPoint.id}">
                     </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">起始频率<span style="color: red">*</span></label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="freqL" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.freqL}">
-                        <input type="text" name="freqL" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="not ${usedFreqPoint}">
+                    <blockquote th:if="${usedFreqPoint}" class="layui-elem-quote">现在可以在下方表单中修改数据</blockquote>
+                    <br>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">业务名称<span style="color: red">*</span></label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="bizName" autocomplete="off" lay-verify="required"
+                                       class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.bizName}">
+                                <input type="text" name="bizName" autocomplete="off" lay-verify="required"
+                                       class="layui-input" th:if="not ${usedFreqPoint}">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">起始频率<span style="color: red">*</span></label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="freqL" autocomplete="off" lay-verify="required"
+                                       class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.freqL}">
+                                <input type="text" name="freqL" autocomplete="off" lay-verify="required"
+                                       class="layui-input" th:if="not ${usedFreqPoint}">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">终止频率<span style="color: red">*</span></label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="freqR" autocomplete="off" lay-verify="required"
+                                       class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.freqR}">
+                                <input type="text" name="freqR" autocomplete="off" lay-verify="required"
+                                       class="layui-input" th:if="not ${usedFreqPoint}">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">终止频率<span style="color: red">*</span></label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="freqR" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="${usedFreqPoint}" th:value="${usedFreqPoint.freqR}">
-                        <input type="text" name="freqR" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="not ${usedFreqPoint}">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="usedFreqPoint_submit">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="usedFreqPoint_submit">立即提交</button>
-                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                </div>
-            </div>
-        </form>
+        </fieldset>
     </div>
     <hr class="layui-bg-blue">
     <div class="layui-row">
@@ -134,10 +140,14 @@
             cellMinWidth: 80,
             toolbar: true,
             loading: true,
-            autoSort:false,
             cols: [[ //标题栏
                 {field: 'id', title: 'ID', sort: true, hide: true},
-                {field: 'freqL', title: '频率范围',templet: "<div>{{d.freqL}}Mhz-{{d.freqR}}Mhz</div>"},
+                {
+                    field: 'freqL',
+                    title: '频率范围',
+                    sort: true,
+                    templet: "<div>{{d.freqL}}Mhz-{{d.freqR}}Mhz</div>"
+                },
                 {field: 'bizName', title: '业务名称'},
                 {
                     field: 'createTime', title: '创建日期',
@@ -150,7 +160,7 @@
             ]],
             initSort: {
                 field: 'id' //排序字段，对应 cols 设定的各字段名
-                ,type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+                , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
             },
             page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -186,10 +196,6 @@
             }
             if (obj.event === 'update') {
                 window.parent.setFrame('/usedfreqpoint/' + id)
-            }
-            if (obj.event === 'download') {
-                layer.msg(file);
-                window.open(file)
             }
         });
 

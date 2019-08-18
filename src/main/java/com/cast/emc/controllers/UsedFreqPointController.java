@@ -42,7 +42,7 @@ public class UsedFreqPointController extends BasicController{
         long count;
         if (StringUtils.isEmpty(condition)) {
             usedFreqPoints = usedFreqPointService.getPage(page - 1, limit);
-            count = sampleDataService.getCount();
+            count = usedFreqPointService.getCount();
         } else {
             usedFreqPoints = usedFreqPointService.getLike(page - 1, limit, condition);
             count = (long) usedFreqPoints.size();
