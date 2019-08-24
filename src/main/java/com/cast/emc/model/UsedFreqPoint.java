@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 /**
  * @创建人 feng
@@ -18,8 +19,8 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "used_freq_point")
 public class UsedFreqPoint extends BasicModel {
-    private String freqL;
-    private String freqR;
+    private BigDecimal freqL;
+    private BigDecimal freqR;
     private String bizName;
     private Long createTime;
 }

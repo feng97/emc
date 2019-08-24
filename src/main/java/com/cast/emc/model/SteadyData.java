@@ -4,32 +4,31 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
+/**
+ * @创建人 feng
+ * @创建时间 2019/8/24
+ * @描述
+ */
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "freq_data")
-public class FreqData extends BasicModel{
+@Table(name = "steady_data")
+public class SteadyData extends BasicModel {
     private String name;    //信号名称
 
     private String item;    //项目名称
-
-    private Long createTime;    //采集时间
-
-    private String modulation;    //调制方式
 
     private String place;    // 采集地点
 
     private String data;    //采集数据
 
-    private String device;  //采集设备
-
-    private BigDecimal frequencyL;
-    private BigDecimal frequencyR;
+    private String report;  //采集报告
 
     private String remarks;    //备注
+
+    private Long createTime;
 }
