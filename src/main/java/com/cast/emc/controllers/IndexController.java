@@ -38,6 +38,16 @@ public class IndexController extends BasicController {
         return "emcdata/list";
     }
 
+    @RequestMapping(value = "/steadydata/add")
+    public String steadyDataAdd() {
+        return "steadydata/add";
+    }
+
+    @RequestMapping(value = "/steadydata/list")
+    public String steadyDataList() {
+        return "steadydata/list";
+    }
+
     @RequestMapping(value = "/pulsedata/add")
     public String pulseDataAdd() {
         return "pulsedata/add";

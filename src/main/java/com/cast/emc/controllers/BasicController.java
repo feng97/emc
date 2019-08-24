@@ -38,6 +38,9 @@ public class BasicController {
     protected UsedFreqPointService usedFreqPointService;
 
     @Autowired
+    protected SteadyDataService steadyDataService;
+
+    @Autowired
     protected UploadService uploadService;
 
     @Autowired

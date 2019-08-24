@@ -40,6 +40,8 @@ public class BasicService {
     @Autowired
     protected UploadService uploadService;
 
+    @Autowired
+    protected SteadyDataJPA steadyDataJPA;
     protected Long formatTime(String time) throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//要转换的时间格式
