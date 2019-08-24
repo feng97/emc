@@ -50,8 +50,10 @@
                 {field: 'item', title: '项目名称'},
                 {field: 'modulation', title: '识别结果'},
                 {field: 'place', title: '采集地点'},
+                {field: 'device', title: '采集设备'},
                 {field: 'data', title: '采集数据', toolbar: '#download'},
                 {field: 'remarks', title: '备注'},
+                {field: 'freq', title: '频率范围', templet: "<div>{{d.frequencyL + 'Mhz' +' ~ '+ d.frequencyR + ' Mhz '}}</div>"},
                 {
                     field: 'createTime', title: '创建日期',
                     templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>",

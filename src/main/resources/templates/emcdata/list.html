@@ -34,6 +34,9 @@
 <script type="text/html" id="download">
     <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="download">下载</a>
 </script>
+<script type="text/html" id="downloadReport">
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="downloadReport">下载</a>
+</script>
 <script th:inline="none">
     layui.use(['table', 'element'], function () {
         var element = layui.element;
@@ -68,6 +71,7 @@
                     }
                 },
                 {field: 'data', title: '采集数据', toolbar: '#download'},
+                {field: 'data', title: '数据识别报告', toolbar: '#downloadReport'},
                 {field: 'modulation', title: '调制方式'},
                 {field: 'remarks', title: '备注', hide: true},
                 {
@@ -91,6 +95,7 @@
         table.on('tool(emcTable)', function (obj) {
             var id = obj.data.id;
             var file = obj.data.data;
+            var report = obj.data.report;
             //console.log(obj)
             if (obj.event === 'del') {
                 layer.confirm('您确定要删除该数据吗?', {btn: ['确定', '取消'], title: "提示"}, function () {
@@ -120,6 +125,10 @@
             if (obj.event === 'download') {
                 layer.msg(file);
                 window.open(file)
+            }
+            if (obj.event === 'downloadReport') {
+                layer.msg(report);
+                window.open(report)
             }
         });
 

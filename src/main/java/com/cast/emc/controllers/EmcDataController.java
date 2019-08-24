@@ -17,8 +17,8 @@ import java.util.Map;
 public class EmcDataController extends BasicController {
     @ResponseBody
     @RequestMapping(value = "/emcdata", method = RequestMethod.POST)
-    public Object add(EmcData emcData, MultipartFile file, String datetime) {
-        emcDataService.saveOrUpdate(emcData, file, datetime);
+    public Object add(EmcData emcData, MultipartFile file, MultipartFile reportFile, String datetime) {
+        emcDataService.saveOrUpdate(emcData, file, reportFile, datetime);
         return ok();
     }
 

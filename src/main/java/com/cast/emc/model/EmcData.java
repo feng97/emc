@@ -35,5 +35,7 @@ public class EmcData extends BasicModel {
 
     private String data;    //采集数据
 
+    private String report;  //采集报告
+
     private String remarks;    //备注
 }

@@ -28,15 +28,19 @@ public class EmcDataService extends BasicService {
         return emcDataJPA.findLike(condition, pageable);
     }
 
-    public void saveOrUpdate(EmcData emcData, MultipartFile file, String datetime) {
+    public void saveOrUpdate(EmcData emcData, MultipartFile file, MultipartFile report,String datetime) {
         try {
-            String path = uploadService.uploadFile(file);
-            emcData.setData(path);
+            String filePath = uploadService.uploadFile(file);
+            String reportPath = uploadService.uploadFile(report);
+            emcData.setData(filePath);
+            emcData.setReport(reportPath);
             if (emcData.getId() != null) {
                 EmcData update = emcDataJPA.findById(emcData.getId()).get();
-                emcData.setData(path == null ? update.getData() : path);
+                emcData.setData(filePath == null ? update.getData() : filePath);
+                emcData.setReport(reportPath == null ? update.getReport() : reportPath);
             } else {
-                emcData.setData(path);
+                emcData.setData(filePath);
+                emcData.setReport(reportPath);
             }
             emcData.setCreateTime(formatTime(datetime));
 

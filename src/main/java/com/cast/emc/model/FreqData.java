@@ -25,5 +25,10 @@ public class FreqData extends BasicModel{
 
     private String data;    //采集数据
 
+    private String device;  //采集设备
+
+    private String frequencyL;
+    private String frequencyR;
+
     private String remarks;    //备注
 }
