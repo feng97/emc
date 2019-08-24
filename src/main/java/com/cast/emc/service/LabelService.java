@@ -1,6 +1,7 @@
 package com.cast.emc.service;
 
 import com.cast.emc.common.ResponseType;
+import com.cast.emc.common.aop.UserOperation;
 import com.cast.emc.exception.BizException;
 import com.cast.emc.model.Label;
 import com.cast.emc.model.enums.DataType;
@@ -12,10 +13,14 @@ import java.util.List;
 @Slf4j
 @Service
 public class LabelService extends BasicService {
+
+    private final static String DEFAULT_OPERATION_DESC = "标签";
+
     public List<Label> getAll() {
         return labelJPA.findAll();
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 1)
     public void saveOrUpdate(Label label) {
         try {
             labelJPA.save(label);
@@ -25,6 +30,7 @@ public class LabelService extends BasicService {
         }
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 2)
     public void delete(Long id) {
         labelJPA.deleteById(id);
     }

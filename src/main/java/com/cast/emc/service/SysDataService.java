@@ -1,6 +1,7 @@
 package com.cast.emc.service;
 
 import com.cast.emc.common.ResponseType;
+import com.cast.emc.common.aop.UserOperation;
 import com.cast.emc.exception.BizException;
 import com.cast.emc.model.SysData;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class SysDataService extends BasicService {
+
+    private final static String DEFAULT_OPERATION_DESC = "型号数据";
+
     public List<SysData> getPage(int index, int size) {
         SysData unitData = new SysData();
         Sort.Direction sort = Sort.Direction.DESC;
@@ -28,6 +32,7 @@ public class SysDataService extends BasicService {
         return sysDataJPA.findLike(condition, pageable);
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 1)
     public void saveOrUpdate(SysData sysData,
                              MultipartFile layout,
                              MultipartFile data,
@@ -63,6 +68,7 @@ public class SysDataService extends BasicService {
         }
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 2)
     public void delete(Long id) {
         sysDataJPA.deleteById(id);
     }

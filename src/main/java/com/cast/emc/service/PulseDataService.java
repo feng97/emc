@@ -1,6 +1,7 @@
 package com.cast.emc.service;
 
 import com.cast.emc.common.ResponseType;
+import com.cast.emc.common.aop.UserOperation;
 import com.cast.emc.exception.BizException;
 import com.cast.emc.model.PulseData;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class PulseDataService extends BasicService {
+
+    private final static String DEFAULT_OPERATION_DESC = "时域包络数据";
+
     public List<PulseData> getPage(int index, int size) {
         PulseData pulseData = new PulseData();
         Sort.Direction sort = Sort.Direction.DESC;
@@ -28,6 +32,7 @@ public class PulseDataService extends BasicService {
         return pulseDataJPA.findLike(condition, pageable);
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 1)
     public void saveOrUpdate(PulseData pulseData, MultipartFile file, String datetime) {
         try {
             String path = uploadService.uploadFile(file);
@@ -42,11 +47,12 @@ public class PulseDataService extends BasicService {
 
             pulseDataJPA.save(pulseData);
         } catch (Exception ex) {
-            log.info("constructRefer add failed", ex);
+            log.info("pulseData add failed", ex);
             throw new BizException(ResponseType.ADD_FAILED);
         }
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 2)
     public void delete(Long id) {
         pulseDataJPA.deleteById(id);
     }
