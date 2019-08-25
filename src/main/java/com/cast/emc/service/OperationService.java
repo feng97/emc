@@ -29,4 +29,8 @@ public class OperationService extends BasicService{
             throw new BizException(ResponseType.ADD_FAILED);
         }
     }
+
+    public Long getCount() {
+        return operationJPA.count();
+    }
 }

@@ -6,7 +6,7 @@
 <div class="layui-container" style="margin-top: 20px">
     <div class="layui-row">
         <span class="layui-breadcrumb">
-            <a>首页</a>
+            <a onclick="window.parent.setFrame('/home/index')">首页</a>
             <a>型号数据子库</a>
             <a th:if="${sysData}"><cite>修改</cite></a>
             <a th:if="${sysData} eq null"><cite>添加</cite></a>

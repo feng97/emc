@@ -17,7 +17,10 @@ public class IndexController extends BasicController {
     public String index() {
         return "base";
     }
-
+    @RequestMapping(value = "/home/index")
+    public String homeIndex() {
+        return "index";
+    }
     @RequestMapping(value = "/login")
     public String login() {
         return "login";

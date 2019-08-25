@@ -41,6 +41,9 @@ public class BasicController {
     protected SteadyDataService steadyDataService;
 
     @Autowired
+    protected OperationService operationService;
+
+    @Autowired
     protected UploadService uploadService;
 
     @Autowired
