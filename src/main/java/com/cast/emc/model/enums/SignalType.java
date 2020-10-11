@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 
+import java.util.HashMap;
+
 @Getter
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum SignalType {
@@ -13,6 +15,7 @@ public enum SignalType {
     TIME("time", "时域信号");
     private String code;
     private String content;
+    static HashMap<SignalType, Integer> map = new HashMap<>();
 
     SignalType(String code, String content) {
         this.code = code;

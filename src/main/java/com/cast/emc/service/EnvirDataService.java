@@ -1,6 +1,7 @@
 package com.cast.emc.service;
 
 import com.cast.emc.common.ResponseType;
+import com.cast.emc.common.aop.UserOperation;
 import com.cast.emc.exception.BizException;
 import com.cast.emc.model.EnvirData;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class EnvirDataService extends BasicService {
+
+    private final static String DEFAULT_OPERATION_DESC = "环境数据";
+
     public List<EnvirData> getPage(int index, int size) {
         EnvirData envirData = new EnvirData();
         Sort.Direction sort = Sort.Direction.DESC;
@@ -27,7 +31,7 @@ public class EnvirDataService extends BasicService {
         Pageable pageable = PageRequest.of(index, size);
         return envirDataJPA.findLike(condition, pageable);
     }
-
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 1)
     public void saveOrUpdate(EnvirData envirData,
                              MultipartFile layout,
                              MultipartFile data,
@@ -62,7 +66,7 @@ public class EnvirDataService extends BasicService {
             throw new BizException(ResponseType.ADD_FAILED);
         }
     }
-
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 2)
     public void delete(Long id) {
         envirDataJPA.deleteById(id);
     }

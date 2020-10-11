@@ -22,7 +22,6 @@ public class InitStartupRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         path.replace("/","\\");
-        System.out.println(path);
         File file = new File(path);
         //如果文件夹不存在则创建
         if (!file.exists() && !file.isDirectory()) {

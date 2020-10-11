@@ -1,6 +1,7 @@
 package com.cast.emc.service;
 
 import com.cast.emc.common.ResponseType;
+import com.cast.emc.common.aop.UserOperation;
 import com.cast.emc.exception.BizException;
 import com.cast.emc.model.SampleData;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class SampleDataService extends BasicService{
+
+    private final static String DEFAULT_OPERATION_DESC = "时域包络指纹样本库数据";
+
     public List<SampleData> getPage(int index, int size) {
         SampleData sampleData = new SampleData();
         Sort.Direction sort = Sort.Direction.DESC;
@@ -28,7 +32,7 @@ public class SampleDataService extends BasicService{
         Pageable pageable = PageRequest.of(index, size);
         return sampleDataJPA.findLike(condition, pageable);
     }
-
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 1)
     public void saveOrUpdate(SampleData sampleData, MultipartFile file) {
         try {
             String path = uploadService.uploadFile(file);
@@ -47,7 +51,7 @@ public class SampleDataService extends BasicService{
             throw new BizException(ResponseType.ADD_FAILED);
         }
     }
-
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 2)
     public void delete(Long id) {
         sampleDataJPA.deleteById(id);
     }

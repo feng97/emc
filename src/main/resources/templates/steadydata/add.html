@@ -7,88 +7,88 @@
     <div class="layui-row">
         <span class="layui-breadcrumb">
             <a onclick="window.parent.setFrame('/home/index')">首页</a>
-            <a>时域包络数据</a>
-            <a th:if="${pulseData}"><cite>修改</cite></a>
-            <a th:if="${pulseData} eq null"><cite>添加</cite></a>
+            <a>稳态干扰数据</a>
+            <a th:if="${steadyData}"><cite>修改</cite></a>
+            <a th:if="${steadyData} eq null"><cite>添加</cite></a>
         </span>
     </div>
     <hr class="layui-bg-blue">
     <div class="layui-row">
-        <form class="layui-form" th:action="@{/pulsedata}" method="post" id="pulseDataForm" enctype="multipart/form-data">
+        <form class="layui-form" th:action="@{/steadydata}" method="post" id="steadyDataForm" enctype="multipart/form-data">
             <div class="layui-input-block">
-                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${pulseData}"
-                       th:value="${pulseData.id}">
+                <input type="hidden" name="id" id="id" autocomplete="off" class="layui-input" th:if="${steadyData}"
+                       th:value="${steadyData.id}">
             </div>
-            <blockquote th:if="${pulseData}" class="layui-elem-quote">在修改数据时，文件可以不用重新上传，默认不进行修改</blockquote>
+            <blockquote th:if="${steadyData}" class="layui-elem-quote">在修改数据时，文件可以不用重新上传，默认不进行修改</blockquote>
             <br>
             <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">信号名称<span style="color: red">*</span></label>
                     <div class="layui-input-inline">
                         <input type="text" name="name" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="${pulseData}" th:value="${pulseData.name}">
+                               class="layui-input" th:if="${steadyData}" th:value="${steadyData.name}">
                         <input type="text" name="name" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="not ${pulseData}">
+                               class="layui-input" th:if="not ${steadyData}">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">项目名称</label>
                     <div class="layui-input-inline">
                         <input type="text" name="item" autocomplete="off"
-                               class="layui-input" th:if="${pulseData}" th:value="${pulseData.item}">
+                               class="layui-input" th:if="${steadyData}" th:value="${steadyData.item}">
                         <input type="text" name="item" autocomplete="off"
-                               class="layui-input" th:if="not ${pulseData}">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">识别结果<span style="color: red">*</span></label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="device" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="${pulseData}" th:value="${pulseData.device}">
-                        <input type="text" name="device" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="not ${pulseData}">
+                               class="layui-input" th:if="not ${steadyData}">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">采集地点</label>
                     <div class="layui-input-inline">
                         <input type="text" name="place" autocomplete="off"
-                               class="layui-input" th:if="${pulseData}" th:value="${pulseData.place}">
+                               class="layui-input" th:if="${steadyData}" th:value="${steadyData.place}">
                         <input type="text" name="place" autocomplete="off"
-                               class="layui-input" th:if="not ${pulseData}">
+                               class="layui-input" th:if="not ${steadyData}">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">采集数据<span th:if="not ${pulseData}" style="color: red">*</span></label>
+                    <label class="layui-form-label">采集数据<span th:if="not ${steadyData}" style="color: red">*</span></label>
                     <div class="layui-input-inline">
                         <input type="file" name="file" autocomplete="off"
-                               class="layui-input" th:if="${pulseData}" th:value="${pulseData.data}">
+                               class="layui-input" th:if="${steadyData}" th:value="${steadyData.data}">
                         <input type="file" name="file" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="not ${pulseData}">
+                               class="layui-input" th:if="not ${steadyData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">数据识别报告<span th:if="not ${steadyData}" style="color: red">*</span></label>
+                    <div class="layui-input-inline">
+                        <input type="file" name="reportFile" autocomplete="off"
+                               class="layui-input" th:if="${steadyData}" th:value="${steadyData.report}">
+                        <input type="file" name="reportFile" autocomplete="off" lay-verify="required"
+                               class="layui-input" th:if="not ${steadyData}">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">备注</label>
                     <div class="layui-input-inline">
                         <input type="text" name="remarks" autocomplete="off"
-                               class="layui-input" th:if="${pulseData}" th:value="${pulseData.remarks}">
+                               class="layui-input" th:if="${steadyData}" th:value="${steadyData.remarks}">
                         <input type="text" name="remarks" autocomplete="off"
-                               class="layui-input" th:if="not ${pulseData}">
+                               class="layui-input" th:if="not ${steadyData}">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">采集时间<span style="color: red">*</span></label>
                     <div class="layui-input-inline">
                         <input type="text" name="datetime" id="datetime" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="${pulseData}" th:value="${#dates.format(pulseData.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                               class="layui-input" th:if="${steadyData}" th:value="${#dates.format(steadyData.createTime,'yyyy-MM-dd HH:mm:ss')}">
                         <input type="text" name="datetime" id="datetime" autocomplete="off" lay-verify="required"
-                               class="layui-input" th:if="not ${pulseData}">
+                               class="layui-input" th:if="not ${steadyData}">
                     </div>
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="pulseData_submit">立即提交</button>
+                    <button class="layui-btn" lay-submit lay-filter="steadyData_submit">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -114,22 +114,22 @@
             trigger: 'click'
         });
         //监听提交
-        form.on('submit(pulseData_submit)', function (data) {
+        form.on('submit(steadyData_submit)', function (data) {
             $.ajax({
-                url: '/pulsedata',
+                url: '/steadydata',
                 type: 'POST',
-                data: new FormData($('#pulseDataForm')[0]),
+                data: new FormData($('#steadyDataForm')[0]),
                 processData: false,
                 contentType: false,
                 dataType: 'json',
                 success: function () {
                     if (document.getElementById("id")){
                         layer.confirm('修改成功！', {btn: ['确定'], title: "提示"}, function () {
-                            window.parent.setFrame("/pulsedata/list")
+                            window.parent.setFrame("/steadydata/list")
                         });
                     } else if (data.id == null || data.id == "") {
                         layer.msg('添加成功！');
-                        $('#pulseDataForm')[0].reset();
+                        $('#steadyDataForm')[0].reset();
                     }
 
                 },
@@ -140,6 +140,7 @@
                     }
                 }
             });
+
             return false;
         });
 

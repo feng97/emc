@@ -7,7 +7,7 @@
     <div class="layui-row">
         <span class="layui-breadcrumb">
         <a onclick="window.parent.setFrame('/home/index')">首页</a>
-        <a>现场干扰数据</a>
+        <a>稳态干扰数据</a>
         <a><cite>列表</cite></a>
     </span>
     </div>
@@ -43,7 +43,7 @@
         var table = layui.table;
         table.render({
             elem: '#emcTable',
-            url: '/api/emcdata',
+            url: '/api/steadydata',
             cellMinWidth: 80,
             toolbar: true,
             loading: true,
@@ -51,28 +51,9 @@
                 {field: 'id', title: 'ID', sort: true},
                 {field: 'name', title: '信号名称'},
                 {field: 'item', title: '项目名称'},
-                {field: 'device', title: '采集设备'},
-                {field: 'snr', title: '信噪比', hide: true},
-                {field: 'place', title: '采集地点', hide: true},
-                {
-                    field: 'centerFreq', title: '中心频率',
-                    templet: function (d) {
-                        if (d.centerFreq) {
-                            return d.centerFreq + 'Mhz'
-                        } else return "";
-                    }
-                },
-                {
-                    field: 'bandWidth', title: '带宽',
-                    templet: function (d) {
-                        if (d.bandWidth) {
-                            return d.bandWidth + 'khz'
-                        } else return "";
-                    }
-                },
+                {field: 'place', title: '采集地点'},
                 {field: 'data', title: '采集数据', toolbar: '#download'},
                 {field: 'report', title: '数据识别报告', toolbar: '#downloadReport'},
-                {field: 'modulation', title: '调制方式'},
                 {field: 'remarks', title: '备注', hide: true},
                 {
                     field: 'createTime', title: '创建日期',
@@ -103,7 +84,7 @@
                     var csrf = $("meta[name='X-CSRF-TOKEN']").attr("content");
                     headers = {"X-CSRF-TOKEN": csrf};
                     $.ajax({//异步请求返回给后台
-                        url: '/emcdata/' + id,
+                        url: '/steadydata/' + id,
                         type: 'DELETE',
                         headers: headers,
                         dataType: 'json',
@@ -120,7 +101,7 @@
                 });
             }
             if (obj.event === 'update') {
-                window.parent.setFrame('/emcdata/' + id)
+                window.parent.setFrame('/steadydata/' + id)
             }
             if (obj.event === 'download') {
                 layer.msg(file);

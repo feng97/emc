@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -29,11 +30,13 @@ public class EmcData extends BasicModel {
 
     private String place;    // 采集地点
 
-    private Long centerFreq;    //中心频率
+    private BigDecimal centerFreq;    //中心频率
 
-    private Long bandWidth;    //带宽
+    private BigDecimal bandWidth;    //带宽
 
     private String data;    //采集数据
+
+    private String report;  //采集报告
 
     private String remarks;    //备注
 }

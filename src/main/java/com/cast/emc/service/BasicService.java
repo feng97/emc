@@ -32,11 +32,19 @@ public class BasicService {
     protected SysDataJPA sysDataJPA;
 
     @Autowired
+    protected UsedFreqPointJPA usedFreqPointJPA;
+
+    @Autowired
+    protected OperationJPA operationJPA;
+
+    @Autowired
     protected LabelJPA labelJPA;
 
     @Autowired
     protected UploadService uploadService;
 
+    @Autowired
+    protected SteadyDataJPA steadyDataJPA;
     protected Long formatTime(String time) throws ParseException {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//要转换的时间格式

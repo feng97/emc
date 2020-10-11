@@ -1,6 +1,7 @@
 package com.cast.emc.service;
 
 import com.cast.emc.common.ResponseType;
+import com.cast.emc.common.aop.UserOperation;
 import com.cast.emc.exception.BizException;
 import com.cast.emc.model.EmcData;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class EmcDataService extends BasicService {
+
+    private final static String DEFAULT_OPERATION_DESC = "现场干扰数据";
+
     public List<EmcData> getPage(int index, int size) {
         EmcData emcData = new EmcData();
         Sort.Direction sort = Sort.Direction.DESC;
@@ -28,15 +32,20 @@ public class EmcDataService extends BasicService {
         return emcDataJPA.findLike(condition, pageable);
     }
 
-    public void saveOrUpdate(EmcData emcData, MultipartFile file, String datetime) {
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 1)
+    public void saveOrUpdate(EmcData emcData, MultipartFile file, MultipartFile report, String datetime) {
         try {
-            String path = uploadService.uploadFile(file);
-            emcData.setData(path);
+            String filePath = uploadService.uploadFile(file);
+            String reportPath = uploadService.uploadFile(report);
+            emcData.setData(filePath);
+            emcData.setReport(reportPath);
             if (emcData.getId() != null) {
                 EmcData update = emcDataJPA.findById(emcData.getId()).get();
-                emcData.setData(path == null ? update.getData() : path);
+                emcData.setData(filePath == null ? update.getData() : filePath);
+                emcData.setReport(reportPath == null ? update.getReport() : reportPath);
             } else {
-                emcData.setData(path);
+                emcData.setData(filePath);
+                emcData.setReport(reportPath);
             }
             emcData.setCreateTime(formatTime(datetime));
 
@@ -46,7 +55,7 @@ public class EmcDataService extends BasicService {
             throw new BizException(ResponseType.ADD_FAILED);
         }
     }
-
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 2)
     public void delete(Long id) {
         emcDataJPA.deleteById(id);
     }

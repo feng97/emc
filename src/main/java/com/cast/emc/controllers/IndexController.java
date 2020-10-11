@@ -17,7 +17,10 @@ public class IndexController extends BasicController {
     public String index() {
         return "base";
     }
-
+    @RequestMapping(value = "/home/index")
+    public String homeIndex() {
+        return "index";
+    }
     @RequestMapping(value = "/login")
     public String login() {
         return "login";
@@ -36,6 +39,16 @@ public class IndexController extends BasicController {
     @RequestMapping(value = "/emcdata/list")
     public String emcDataList() {
         return "emcdata/list";
+    }
+
+    @RequestMapping(value = "/steadydata/add")
+    public String steadyDataAdd() {
+        return "steadydata/add";
+    }
+
+    @RequestMapping(value = "/steadydata/list")
+    public String steadyDataList() {
+        return "steadydata/list";
     }
 
     @RequestMapping(value = "/pulsedata/add")
@@ -102,5 +115,10 @@ public class IndexController extends BasicController {
     @RequestMapping(value = "/sysdata/list")
     public String sysDataList() {
         return "sysdata/list";
+    }
+
+    @RequestMapping(value = "/usedfreqpoint/list")
+    public String usedFreqPointAdd() {
+        return "usedfreqpoint/list";
     }
 }

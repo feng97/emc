@@ -1,6 +1,7 @@
 package com.cast.emc.service;
 
 import com.cast.emc.common.ResponseType;
+import com.cast.emc.common.aop.UserOperation;
 import com.cast.emc.exception.BizException;
 import com.cast.emc.model.FreqData;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,9 @@ import java.util.List;
 @Slf4j
 @Service
 public class FreqDataService extends BasicService {
+
+    private final static String DEFAULT_OPERATION_DESC = "频谱包络数据";
+
     public List<FreqData> getPage(int index, int size) {
         FreqData freqData = new FreqData();
         Sort.Direction sort = Sort.Direction.DESC;
@@ -28,6 +32,7 @@ public class FreqDataService extends BasicService {
         return freqDataJPA.findLike(condition, pageable);
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 1)
     public void saveOrUpdate(FreqData freqData, MultipartFile file, String datetime) {
         try {
             String path = uploadService.uploadFile(file);
@@ -47,6 +52,7 @@ public class FreqDataService extends BasicService {
         }
     }
 
+    @UserOperation(value = DEFAULT_OPERATION_DESC, type = 2)
     public void delete(Long id) {
         freqDataJPA.deleteById(id);
     }

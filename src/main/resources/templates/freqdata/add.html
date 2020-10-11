@@ -6,7 +6,7 @@
 <div class="layui-container" style="margin-top: 20px">
     <div class="layui-row">
         <span class="layui-breadcrumb">
-            <a>首页</a>
+            <a onclick="window.parent.setFrame('/home/index')">首页</a>
             <a>频域包络数据</a>
             <a th:if="${freqData}"><cite>修改</cite></a>
             <a th:if="${freqData} eq null"><cite>添加</cite></a>
@@ -59,6 +59,33 @@
                     </div>
                 </div>
                 <div class="layui-inline">
+                    <label class="layui-form-label">采集设备</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="device" autocomplete="off"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.device}">
+                        <input type="text" name="device" autocomplete="off"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">频率起点(Mhz)</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="frequencyL" autocomplete="off"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.frequencyL}">
+                        <input type="text" name="frequencyL" autocomplete="off"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">频率终点(Mhz)</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="frequencyR" autocomplete="off"
+                               class="layui-input" th:if="${freqData}" th:value="${freqData.frequencyR}">
+                        <input type="text" name="frequencyR" autocomplete="off"
+                               class="layui-input" th:if="not ${freqData}">
+                    </div>
+                </div>
+                <div class="layui-inline">
                     <label class="layui-form-label">采集数据<span th:if="not ${freqData}"
                                                               style="color: red">*</span></label>
                     <div class="layui-input-inline">
@@ -78,9 +105,9 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">采集时间</label>
+                    <label class="layui-form-label">采集时间<span style="color: red">*</span></label>
                     <div class="layui-input-inline">
-                        <input type="text" name="datetime" id="datetime" autocomplete="off"
+                        <input type="text" name="datetime" id="datetime" autocomplete="off" lay-verify="required"
                                class="layui-input" th:if="${freqData}"
                                th:value="${#dates.format(freqData.createTime,'yyyy-MM-dd HH:mm:ss')}">
                         <input type="text" name="datetime" id="datetime" autocomplete="off" lay-verify="required"

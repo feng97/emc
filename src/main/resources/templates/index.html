@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>电磁干扰数据管理系统</title>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{head::head}">
 </head>
 <body>
+<div class="layui-container" style="margin-top: 20px">
+    <div class="layadmin-tabsbody-item layui-show">
+        <div class="layui-carousel" id="test1">
+            <div carousel-item>
+                <div>条目1</div>
+                <div>条目2</div>
+                <div>条目3</div>
+                <div>条目4</div>
+                <div>条目5</div>
+            </div>
+        </div>
+    </div>
+    <table class="layui-hide" id="operationTable" lay-filter="operationTable"></table>
+</div>
 
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use(['element', 'carousel'], function () {
+        var element = layui.element;
+        var carousel = layui.carousel;
+
+        carousel.render({
+            elem: '#test1'
+            , width: '100%' //设置容器宽度
+            , arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+        });
+    });
+
+</script>
+<script type="text/html" id="operationType">
+    {{#  if(d.operationType === '删除操作'){ }}
+    <span style="color: red;">{{ d.operationType }}</span>
+    {{#  } else if(d.operationType === '增加操作') { }}
+    <span style="color: green;">{{ d.operationType }}</span>
+    {{#  } else{ }}
+    <span style="color: #FFD700;">{{ d.operationType }}</span>
+    {{#  } }}
+</script>
+<script th:inline="none">
+    layui.use(['layer', 'table', 'element'], function () {
+        var layer = layui.layer;
+        var element = layui.element;
+        var table = layui.table;
+        $ = layui.jquery;
+        table.render({
+            elem: '#operationTable',
+            url: '/api/operation/getall',
+            cellMinWidth: 80,
+            loading: true,
+            cols: [[ //标题栏
+                {field: 'operationDataName', title: '操作数据类型',width: 180},
+                {field: 'operationType', title: '操作类型',width: 180, templet: '#operationType'},
+                {field: 'operationIp', title: '操作人IP',width: 180},
+                {field: 'operationContent', title: '操作内容'},
+                {
+                    field: 'operationTime', title: '操作日期',
+                    templet: "<div>{{layui.util.toDateString(d.operationTime, 'yyyy-MM-dd HH:mm:ss')}}</div>",
+                    sort: true,
+                    width: 180
+                },
+            ]],
+            initSort: {
+                field: 'operationTime',
+                type: 'desc'
+            },
+
+        });
+        //监听行单击事件（单击事件为：rowDouble）
+        table.on('row(operationTable)', function(obj){
+            var data = obj.data;
+
+            layer.alert(JSON.stringify(data), {
+                title: '详细数据：'
+            });
+
+            //标注选中样式
+            obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+        });
+    });
+</script>
 </body>
 </html>
